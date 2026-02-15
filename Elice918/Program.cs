@@ -71,6 +71,10 @@ namespace EliceBot
             {
                 await message.Channel.SendMessageAsync("ご主人様..♡");
             }
+            if (command == "Ala")
+            {
+                await message.Channel.SendMessageAsync("My best polish friend met in roblox 6 or 5 idk months");
+            }
         }
 
         private Task LogAsync(LogMessage log)
