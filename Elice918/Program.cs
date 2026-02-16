@@ -1,7 +1,8 @@
-﻿using System;
-using System.Threading.Tasks;
-using Discord;
+﻿using Discord;
 using Discord.WebSocket;
+using System;
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 
 namespace EliceBot
 {
@@ -63,6 +64,10 @@ namespace EliceBot
             {
                 await message.Channel.SendMessageAsync("바보똥멍청이변태지만좋은누나");
             }
+            if (command == "제피르(희망편)")
+            {
+                await message.Channel.SendMessageAsync("세상에서 제일이쁘고 착하고 타인의 모범이 되는 누나");
+            }
             if (command == "엘리스")
             {
                 await message.Channel.SendMessageAsync("히히~ 저에요!");
@@ -79,6 +84,32 @@ namespace EliceBot
             {
                 await message.Channel.SendMessageAsync("제 동생이에요! 요즘엔 바빠서 잘 못 만나지만.. 다음엔 꼭 사탕을 잔뜩 사갈거에요! 벨리스는 사탕을 아주 좋아하거든요.");
             }
+            if (command == "EmbedTest")
+            {
+                await message.Channel.SendMessageAsync("이건 임베드 메시지입니다!", embed: new EmbedBuilder
+                {
+                    Title = "임베드 제목",
+                    Description = "임베드 설명",
+                    Color = Color.Blue
+                }
+                .Build());
+            }
+            /*
+            if (command == "Rand")
+            {
+                // 명령어 뒤 숫자 (min,max)에 따라 랜덤 숫자 생성
+                await message.Channel.SendMessageAsync($"랜덤으로 {}와 {}사이의 숫자를 뽑아 드릴게요! 잠시만요..");
+                // 주사위 굴리는 중... 이라고 메시지 보내기
+                var loading = await message.Channel.SendMessageAsync("주사위 굴리는 중.. 🎲");
+                // 3초 후에 랜덤 숫자 보내기(버튼 누르면 바로 랜덤 숫자 보내기)
+                await loading.ModifyAsync(m => m.Content = $"{result}");
+            }
+            static int Rnum(int min, int max)
+            {
+                var random = new Random();
+                return random.Next(min, max + 1);
+            }
+            */
         }
 
         private Task LogAsync(LogMessage log)
