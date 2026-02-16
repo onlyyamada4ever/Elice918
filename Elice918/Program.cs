@@ -57,7 +57,7 @@ namespace EliceBot
             }
             if (command == "도움")
             {
-                await message.Channel.SendMessageAsync("도움이 필요하신가요?\n❓현재 사용 가능한 명령어는 test, 제피르, 엘리스, 엘리프,Ala(ala)가 있어요!\n📩기타 내용이나 문의는 주인님에게 문의해주세요!");
+                await message.Channel.SendMessageAsync("도움이 필요하신가요?\n❓현재 사용 가능한 명령어는 test, 제피르, 엘리스, 엘리프,Ala(ala), 벨리스가 있어요!\n📩기타 내용이나 문의는 주인님에게 문의해주세요!");
             }
             if (command == "제피르")
             {
@@ -73,7 +73,11 @@ namespace EliceBot
             }
             if (command == "Ala" || command == "ala")
             {
-                await message.Channel.SendMessageAsync("My best polish friend met in roblox 6 or 5 idk months);
+                await message.Channel.SendMessageAsync("My best polish friend met in roblox 6 or 5 idk months");
+            }
+            if (command == "벨리스")
+            {
+                await message.Channel.SendMessageAsync("제 동생이에요! 요즘엔 바빠서 잘 못 만나지만.. 다음엔 꼭 사탕을 잔뜩 사갈거에요! 벨리스는 사탕을 아주 좋아하거든요.");
             }
         }
 
