@@ -80,7 +80,6 @@ namespace EliceBot
                 await message.Channel.SendMessageAsync("제 동생이에요! 요즘엔 바빠서 잘 못 만나지만.. 다음엔 꼭 사탕을 잔뜩 사갈거에요! 벨리스는 사탕을 아주 좋아하거든요.");
             }
         }
-
         private Task LogAsync(LogMessage log)
         {
             Console.WriteLine(log.ToString());
