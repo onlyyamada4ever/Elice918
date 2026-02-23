@@ -1,57 +1,26 @@
-﻿using Discord;
+﻿// Commands/RandCommand.cs
+using Discord;
 using Discord.WebSocket;
-using Discord.Interactions;
 using System.Linq;
 using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Threading;
 
-namespace EliceBot
+namespace Elice918.Utillity.Games
 {
-    class Program
+    class RandCommand
     {
-        private DiscordSocketClient _client;
-        private string _token;
-        private string _prefix;
-
+        private readonly string _prefix;
         private readonly Dictionary<ulong, CancellationTokenSource> _randTasks = new();
 
-        static Task Main(string[] args) => new Program().MainAsync();
-
-        public async Task MainAsync()
+        public RandCommand(string prefix)
         {
-            _token = Environment.GetEnvironmentVariable("DISCORD_TOKEN");
-            _prefix = Environment.GetEnvironmentVariable("DISCORD_PREFIX") ?? ".";
-
-            if (string.IsNullOrWhiteSpace(_token))
-            {
-                Console.WriteLine("DISCORD_TOKEN 환경변수가 설정되지 않았습니다.");
-                return;
-            }
-
-            var config = new DiscordSocketConfig
-            {
-                GatewayIntents = GatewayIntents.Guilds |
-                                 GatewayIntents.GuildMessages |
-                                 GatewayIntents.MessageContent
-            };
-
-            _client = new DiscordSocketClient(config);
-
-            _client.Log += LogAsync;
-            _client.MessageReceived += MessageHandler;
-            _client.InteractionCreated += InteractionHandler;
-
-            await _client.LoginAsync(TokenType.Bot, _token);
-            await _client.StartAsync();
-
-            Console.WriteLine("Bot started.");
-            await Task.Delay(-1);
+            _prefix = prefix;
         }
 
         // ===================== 명령어 =====================
-        private async Task MessageHandler(SocketMessage msg)
+        public async Task MessageHandler(SocketMessage msg)
         {
             if (msg is not SocketUserMessage message) return;
             if (message.Author.IsBot) return;
@@ -157,13 +126,13 @@ namespace EliceBot
         }
 
         // ===================== 버튼 처리 =====================
-        private async Task InteractionHandler(SocketInteraction interaction)
+        public async Task InteractionHandler(SocketInteraction interaction)
         {
             if (interaction is not SocketMessageComponent comp) return;
 
             var parts = comp.Data.CustomId.Split(':');
 
-            ulong ownerId = 0; // ✅ 밖에서 선언(스코프 문제 해결)
+            ulong ownerId = 0;
 
             if (parts.Length >= 3 && parts[0] == "rand")
             {
@@ -250,12 +219,6 @@ namespace EliceBot
                 .WithButton("다시 돌리기", $"rand:reroll:{ownerId}:{min}:{max}", ButtonStyle.Primary)
                 .WithButton("그만두기", $"rand:close:{ownerId}", ButtonStyle.Danger)
                 .Build();
-        }
-
-        private Task LogAsync(LogMessage log)
-        {
-            Console.WriteLine(log.ToString());
-            return Task.CompletedTask;
         }
     }
 }
